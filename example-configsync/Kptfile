@@ -1,0 +1,30 @@
+apiVersion: kpt.dev/v1
+kind: Kptfile
+metadata: # kpt-merge: /example-configsync
+  name: example-configsync
+  annotations:
+    config.kubernetes.io/local-config: "true"
+    internal.kpt.dev/upstream-identifier: 'kpt.dev|Kptfile|default|example-configsync'
+    nephio.org/cluster-name: example
+upstream:
+  type: git
+  git:
+    repo: https://github.com/nephio-project/nephio-example-packages.git
+    directory: configsync
+    ref: configsync/v1
+upstreamLock:
+  type: git
+  git:
+    repo: https://github.com/nephio-project/nephio-example-packages.git
+    directory: configsync
+    ref: configsync/v1
+    commit: db1ce6c1a207991fafbb65e996e1130763759e20
+info:
+  site: https://nephio.org
+  description: Package for configSync.
+pipeline:
+  mutators:
+  - name: PackageVariant.example-configsync..0
+    image: gcr.io/kpt-fn/set-annotations:v0.1.4
+    configMap:
+      nephio.org/cluster-name: example
