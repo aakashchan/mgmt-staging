@@ -1,0 +1,26 @@
+apiVersion: kpt.dev/v1
+kind: Kptfile
+metadata: # kpt-merge: /example-rootsync
+  name: example-rootsync
+  annotations:
+    config.kubernetes.io/local-config: "true"
+    internal.kpt.dev/upstream-identifier: 'kpt.dev|Kptfile|default|example-rootsync'
+upstream:
+  type: git
+  git:
+    repo: https://github.com/nephio-project/nephio-example-packages.git
+    directory: rootsync
+    ref: rootsync/v3
+upstreamLock:
+  type: git
+  git:
+    repo: https://github.com/nephio-project/nephio-example-packages.git
+    directory: rootsync
+    ref: rootsync/v3
+    commit: ce0e222636400e6e9aa1a8a4c3b54e26b6e4be7e
+info:
+  description: Provisions rootsync to configure configsync for a Nephio cluster
+pipeline:
+  mutators:
+  - image: gcr.io/kpt-fn/starlark:v0.4.3
+    configPath: set-values.yaml
