@@ -22,5 +22,15 @@ info:
   description: Provisions rootsync to configure configsync for a Nephio cluster
 pipeline:
   mutators:
+  - name: PackageVariant.example-rootsync..0
+    image: gcr.io/kpt-fn/set-annotations:v0.1.4
+    configMap:
+      nephio.org/cluster-name: example
   - image: gcr.io/kpt-fn/starlark:v0.4.3
     configPath: set-values.yaml
+status:
+  conditions:
+  - type: config.injection.WorkloadCluster.workload-cluster
+    status: "True"
+    message: injected resource "example" from cluster
+    reason: ConfigInjected
