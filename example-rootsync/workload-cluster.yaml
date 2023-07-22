@@ -7,7 +7,6 @@ metadata: # kpt-merge: /workload-cluster
     kpt.dev/config-injection: optional
     internal.kpt.dev/upstream-identifier: infra.nephio.org|WorkloadCluster|default|workload-cluster
     kpt.dev/injected-resource: example
-    nephio.org/cluster-name: example
 spec:
   clusterName: example
   cnis:
