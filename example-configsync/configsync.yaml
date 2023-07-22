@@ -5,6 +5,5 @@ metadata: # kpt-merge: /config-management
   annotations:
     config.kubernetes.io/depends-on: apiextensions.k8s.io/CustomResourceDefinition/configmanagements.configmanagement.gke.io
     internal.kpt.dev/upstream-identifier: 'configmanagement.gke.io|ConfigManagement|default|config-management'
-    nephio.org/cluster-name: example
 spec:
   enableMultiRepo: true
